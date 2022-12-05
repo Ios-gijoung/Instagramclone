@@ -12,7 +12,7 @@ class SearchController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     
-        
+        print("a")
         
     
         view.backgroundColor = .systemPink
