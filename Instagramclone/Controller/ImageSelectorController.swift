@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  ImageSelectorController.swift
 //  Instagramclone
 //
 //  Created by user on 2022/12/05.
@@ -7,16 +7,11 @@
 
 import UIKit
 
-class ViewController: UIViewController {
-
+class ImageSelectorController: UIViewController {
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
         
-      
-        
+        view.backgroundColor = .systemRed
     }
-
-
 }
-
