@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE6DA49829485E0200659653 /* FeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6DA49729485E0200659653 /* FeedCell.swift */; };
+		CE6DA49A2948619E00659653 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6DA4992948619E00659653 /* Extensions.swift */; };
+		CE6DA49D294861DD00659653 /* JGProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = CE6DA49C294861DD00659653 /* JGProgressHUD */; };
 		CE9E7949293DCCCF00AC19C8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9E7948293DCCCF00AC19C8 /* AppDelegate.swift */; };
 		CE9E794B293DCCCF00AC19C8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9E794A293DCCCF00AC19C8 /* SceneDelegate.swift */; };
 		CE9E794D293DCCCF00AC19C8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9E794C293DCCCF00AC19C8 /* ViewController.swift */; };
@@ -22,6 +25,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CE6DA49729485E0200659653 /* FeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCell.swift; sourceTree = "<group>"; };
+		CE6DA4992948619E00659653 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		CE9E7945293DCCCF00AC19C8 /* Instagramclone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Instagramclone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE9E7948293DCCCF00AC19C8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CE9E794A293DCCCF00AC19C8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -43,6 +48,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE6DA49D294861DD00659653 /* JGProgressHUD in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -88,6 +94,7 @@
 		CE9E795C293DE3F500AC19C8 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				CE6DA4992948619E00659653 /* Extensions.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -122,6 +129,7 @@
 		CE9E7960293DE40000AC19C8 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				CE6DA49729485E0200659653 /* FeedCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -149,6 +157,9 @@
 			dependencies = (
 			);
 			name = Instagramclone;
+			packageProductDependencies = (
+				CE6DA49C294861DD00659653 /* JGProgressHUD */,
+			);
 			productName = Instagramclone;
 			productReference = CE9E7945293DCCCF00AC19C8 /* Instagramclone.app */;
 			productType = "com.apple.product-type.application";
@@ -177,6 +188,9 @@
 				Base,
 			);
 			mainGroup = CE9E793C293DCCCF00AC19C8;
+			packageReferences = (
+				CE6DA49B294861DD00659653 /* XCRemoteSwiftPackageReference "JGProgressHUD" */,
+			);
 			productRefGroup = CE9E7946293DCCCF00AC19C8 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -205,6 +219,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE9E7963293DE4BB00AC19C8 /* MainController.swift in Sources */,
+				CE6DA49829485E0200659653 /* FeedCell.swift in Sources */,
 				CE9E7969293DEC1600AC19C8 /* ImageSelectorController.swift in Sources */,
 				CE9E796B293DEC2800AC19C8 /* NotificationController.swift in Sources */,
 				CE9E7967293DEC0100AC19C8 /* SearchController.swift in Sources */,
@@ -212,6 +227,7 @@
 				CE9E796D293DEC4700AC19C8 /* ProfileController.swift in Sources */,
 				CE9E7965293DEBE100AC19C8 /* FeedController.swift in Sources */,
 				CE9E7949293DCCCF00AC19C8 /* AppDelegate.swift in Sources */,
+				CE6DA49A2948619E00659653 /* Extensions.swift in Sources */,
 				CE9E794B293DCCCF00AC19C8 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -428,6 +444,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		CE6DA49B294861DD00659653 /* XCRemoteSwiftPackageReference "JGProgressHUD" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/JonasGessner/JGProgressHUD.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		CE6DA49C294861DD00659653 /* JGProgressHUD */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CE6DA49B294861DD00659653 /* XCRemoteSwiftPackageReference "JGProgressHUD" */;
+			productName = JGProgressHUD;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = CE9E793D293DCCCF00AC19C8 /* Project object */;
 }
