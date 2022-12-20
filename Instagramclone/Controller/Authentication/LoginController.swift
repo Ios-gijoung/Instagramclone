@@ -10,6 +10,9 @@ import UIKit
 class LoginController: UIViewController {
     
     // MARK: - Properties
+    //이 속성을 통해 LoginViewModel을 사용할 수 있다.
+    private var viewModel = LoginViewModel()
+    
     // 아이콘을 만들어 줬다면 아래 Helpers에 등록해주자.
     private let iconImage: UIImageView = {
         let iv = UIImageView(image: #imageLiteral(resourceName: "Instagram_logo_white"))
@@ -35,10 +38,11 @@ class LoginController: UIViewController {
         let button = UIButton(type: .system)
         button.setTitle("Log In", for: .normal)
         button.setTitleColor(.white, for: .normal)
-        button.backgroundColor = #colorLiteral(red: 0.3647058904, green: 0.06666667014, blue: 0.9686274529, alpha: 1)
+        button.backgroundColor = #colorLiteral(red: 0.3647058904, green: 0.06666667014, blue: 0.9686274529, alpha: 1).withAlphaComponent(0.5)
         button.layer.cornerRadius = 5
         button.setHeight(50)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
+        button.isEnabled = false
         return button
     }()
     
@@ -66,15 +70,30 @@ class LoginController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
+        configureNotificationObservers()
     }
     
     // MARK: - Actions
-    // 이버튼 덕분에 사인업 누르면 리지스트레이션 페이지로 넘어갈 수 있다. 
+    // 이버튼 덕분에 사인업 누르면 리지스트레이션 페이지로 넘어갈 수 있다.
     @objc func handleShowSignUp() {
         let controller = RegistrationController()
         navigationController?.pushViewController(controller, animated: true)
     }
     
+    //로그인창과 비밀번호창 입력한 것들을 알려준다.
+    @objc func textDidChange(sender: UITextField) {
+        if sender == emailTextField {
+            viewModel.email = sender.text
+        } else {
+            viewModel.password = sender.text
+        }
+    
+        loginButton.backgroundColor = viewModel.buttonBackgroundColor
+        loginButton.setTitleColor(viewModel.buttonTitleColor, for: .normal)
+        loginButton.isEnabled = viewModel.formIsValid
+        //이 문장들 덕분에 로그인 양식이 잘되면 활성화하고 잘못됫다면 활성화 하지 않는다. 
+        
+    }
     
     // MARK: - Helpers
     
@@ -82,7 +101,7 @@ class LoginController: UIViewController {
         configureGradientLayer()
         navigationController?.navigationBar.isHidden = true
         navigationController?.navigationBar.barStyle = .black
-
+        
         
         view.addSubview(iconImage)
         iconImage.centerX(inView: view)
@@ -101,5 +120,12 @@ class LoginController: UIViewController {
         view.addSubview(dontHaveAccountButton)
         dontHaveAccountButton.centerX(inView: view)
         dontHaveAccountButton.anchor(bottom: view.safeAreaLayoutGuide.bottomAnchor)
+    }
+    
+    //configureNotificationObservers = 알림 관찰자 구성
+    //lifecycle에 등록 해줘야 한다.
+    func configureNotificationObservers() {
+        emailTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
+        passwordTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
     }
 }

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		CE2BB618294C7B0C0036274A /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2BB617294C7B0C0036274A /* CustomTextField.swift */; };
+		CE33E76B2951BD200090B17D /* AuthenticationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE33E76A2951BD200090B17D /* AuthenticationViewModel.swift */; };
 		CE6DA49829485E0200659653 /* FeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6DA49729485E0200659653 /* FeedCell.swift */; };
 		CE6DA49A2948619E00659653 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6DA4992948619E00659653 /* Extensions.swift */; };
 		CE6DA49D294861DD00659653 /* JGProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = CE6DA49C294861DD00659653 /* JGProgressHUD */; };
@@ -29,6 +30,7 @@
 
 /* Begin PBXFileReference section */
 		CE2BB617294C7B0C0036274A /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
+		CE33E76A2951BD200090B17D /* AuthenticationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewModel.swift; sourceTree = "<group>"; };
 		CE6DA49729485E0200659653 /* FeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCell.swift; sourceTree = "<group>"; };
 		CE6DA4992948619E00659653 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		CE9E7945293DCCCF00AC19C8 /* Instagramclone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Instagramclone.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -129,6 +131,7 @@
 		CE9E795F293DE3FE00AC19C8 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				CE33E76A2951BD200090B17D /* AuthenticationViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -241,6 +244,7 @@
 				CE6DA49829485E0200659653 /* FeedCell.swift in Sources */,
 				CE9E7969293DEC1600AC19C8 /* ImageSelectorController.swift in Sources */,
 				CE9E796B293DEC2800AC19C8 /* NotificationController.swift in Sources */,
+				CE33E76B2951BD200090B17D /* AuthenticationViewModel.swift in Sources */,
 				CE9E7967293DEC0100AC19C8 /* SearchController.swift in Sources */,
 				CE9E794D293DCCCF00AC19C8 /* ViewController.swift in Sources */,
 				CE9E796D293DEC4700AC19C8 /* ProfileController.swift in Sources */,
