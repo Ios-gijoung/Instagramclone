@@ -56,7 +56,7 @@ class LoginController: UIViewController {
         let button = UIButton(type: .system)
         //extension에서 정의한 양식을 붙여넣어준다.
         button.attributedTitle(firstPart: "Don't have an account?", secondPart: "Sign Up")
-        button.addTarget(self, action: #selector(handleShowSignUp), for: .touchUpInside) //여기서 셀프는 로긴 컨트롤러 클래스를 말한다.
+        button.addTarget(self, action: #selector(handleShowSignUp), for: .touchUpInside) //여기서 셀프는 로긴 컨트롤러 클래스를 말한다, 누르면 아래 핸들쇼 사인업이 실행됨, 목적은 터치시(클릭시) 기재내용으로 들어간다.
         return button
     }()
     
@@ -79,15 +79,10 @@ class LoginController: UIViewController {
     // MARK: - Helpers
     
     func configureUI() {
-        view.backgroundColor = .white
+        configureGradientLayer()
         navigationController?.navigationBar.isHidden = true
         navigationController?.navigationBar.barStyle = .black
-        
-        let gradient = CAGradientLayer()
-        gradient.colors = [UIColor.systemPurple.cgColor, UIColor.systemBlue.cgColor]
-        gradient.locations = [0, 1]
-        view.layer.addSublayer(gradient)
-        gradient.frame = view.frame
+
         
         view.addSubview(iconImage)
         iconImage.centerX(inView: view)

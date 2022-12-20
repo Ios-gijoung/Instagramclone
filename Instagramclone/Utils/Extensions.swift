@@ -9,25 +9,7 @@
 import UIKit
 import JGProgressHUD
 
-// 사인업 네비게이션 그라데이션 넣을 차례이다.
-
-
-
-
-
-//loginController의 길이를 줄여주기 위해 이코드를 생성했다. 
-extension UIButton {
-    func attributedTitle(firstPart: String, secondPart: String) {
-        let atts: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor(white: 1, alpha: 0.87), .font:UIFont.systemFont(ofSize: 16)]
-        let attributedTitle = NSMutableAttributedString(string: "\(firstPart)", attributes: atts)
-        
-        let boldAtts: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor(white: 1, alpha: 0.87), .font: UIFont.boldSystemFont(ofSize: 16)]
-        attributedTitle.append(NSAttributedString(string: secondPart, attributes: boldAtts))
-        
-        setAttributedTitle(attributedTitle, for: .normal)
-    }
-}
-
+// 사인업 네비게이션 그라데이션 넣을 차례이다. - 할려고 했는데 아래 정리가 되어있다
 extension UIViewController {
     static let hud = JGProgressHUD(style: .dark)
     
@@ -53,6 +35,19 @@ extension UIViewController {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
         present(alert, animated: true, completion: nil)
+    }
+}
+
+//loginController의 길이를 줄여주기 위해 이코드를 생성했다. 
+extension UIButton {
+    func attributedTitle(firstPart: String, secondPart: String) {
+        let atts: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor(white: 1, alpha: 0.87), .font:UIFont.systemFont(ofSize: 16)]
+        let attributedTitle = NSMutableAttributedString(string: "\(firstPart)", attributes: atts)
+        
+        let boldAtts: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor(white: 1, alpha: 0.87), .font: UIFont.boldSystemFont(ofSize: 16)]
+        attributedTitle.append(NSAttributedString(string: secondPart, attributes: boldAtts))
+        
+        setAttributedTitle(attributedTitle, for: .normal)
     }
 }
 
