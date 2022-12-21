@@ -87,12 +87,8 @@ class LoginController: UIViewController {
         } else {
             viewModel.password = sender.text
         }
-    
-        loginButton.backgroundColor = viewModel.buttonBackgroundColor
-        loginButton.setTitleColor(viewModel.buttonTitleColor, for: .normal)
-        loginButton.isEnabled = viewModel.formIsValid
-        //이 문장들 덕분에 로그인 양식이 잘되면 활성화하고 잘못됫다면 활성화 하지 않는다. 
-        
+        //아래 updateForm이 있는데 덕분에 코드가 깔끔하게 처리된다.
+        updateForm()
     }
     
     // MARK: - Helpers
@@ -127,5 +123,16 @@ class LoginController: UIViewController {
     func configureNotificationObservers() {
         emailTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
         passwordTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
+    }
+}
+
+ // MARK: - FormViewModel
+
+extension LoginController: FormViewModel {
+    func updateForm() {
+        //이 문장들 덕분에 양식이 잘되면 활성화하고 잘못됫다면 활성화 하지 않는다.
+        loginButton.backgroundColor = viewModel.buttonBackgroundColor
+        loginButton.setTitleColor(viewModel.buttonTitleColor, for: .normal)
+        loginButton.isEnabled = viewModel.formIsValid
     }
 }

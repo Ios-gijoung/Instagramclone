@@ -10,12 +10,15 @@ import UIKit
 class RegistrationController: UIViewController {
     
     // MARK: - Properties
+    //이 속성을 통해 AuthenticationViewModel의 RegistrationViewModel을 사용할 수 있다.
+    private var viewModel = RegistrationViewModel()
     
     private let plushPhotoButton: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(#imageLiteral(resourceName: "plus_photo"), for: .normal)
         button.tintColor = .white
-        return button 
+        button.addTarget(self, action: #selector(handleProfilePhotoSelect), for: .touchUpInside)
+        return button
     }()
     
     //Sign up 누를시 나올 텍스트필드와 버튼을 구성해 준다, 모두 작성시 스택뷰로 넘어간다
@@ -62,12 +65,36 @@ class RegistrationController: UIViewController {
     @objc func handleShowLogin() {
         navigationController?.popViewController(animated: true)
     }
+    //각 텍스트필드에 글씨를 안쓰면 버튼 활성화가 안된다.
+    @objc func textDidChange(sender: UITextField) {
+        if sender == emailTextField {
+            viewModel.email = sender.text
+        } else if sender == passwordTextField {
+            viewModel.password = sender.text
+        } else  if sender == fullnameTextField {
+            viewModel.fullname = sender.text
+        } else {
+            viewModel.username = sender.text
+        }
+        updateForm()
+    }
+    
+    //위 plusphotobutton을 위해 handleProfilePhotoSelect기능을 만들어준다.
+    @objc func handleProfilePhotoSelect() {
+       let picker = UIImagePickerController()
+        picker.delegate = self //RegistrationController 자신을 받기에 셀프로 만들어 준다. 아래 확장함수도 함께 만들어준다.
+        picker.allowsEditing = true
+        
+        present(picker, animated: true, completion: nil)
+    }
     
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
+        configureNotificationObservers()
+        
     }
     
     // MARK: - Helpers
@@ -75,14 +102,14 @@ class RegistrationController: UIViewController {
     func configureUI() {
         configureGradientLayer()
         
-        //사진추가 버튼 추가 
+        //사진추가 버튼 추가
         view.addSubview(plushPhotoButton)
         plushPhotoButton.centerX(inView: view)
         plushPhotoButton.setDimensions(height: 140, width: 140)
         plushPhotoButton.anchor(top: view.safeAreaLayoutGuide.topAnchor, paddingTop: 32)
         
         let stack = UIStackView(arrangedSubviews: [emailTextField, passwordTextField, fullnameTextField, usernameTextField,signUpButton])
-        //기재되어있는 텍스트필드에 맞게 수정해 준다. 
+        //기재되어있는 텍스트필드에 맞게 수정해 준다.
         stack.axis = .vertical
         stack.spacing = 20
         
@@ -92,5 +119,44 @@ class RegistrationController: UIViewController {
         view.addSubview(alreadyHaveAccountButton)
         alreadyHaveAccountButton.centerX(inView: view)
         alreadyHaveAccountButton.anchor(bottom: view.safeAreaLayoutGuide.bottomAnchor)
+    }
+    
+    func configureNotificationObservers() {
+        //configureNotificationObservers = 알림 관찰자 구성
+        //lifecycle에 등록 해줘야 한다.
+        emailTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
+        passwordTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
+        fullnameTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
+        usernameTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
+    }
+}
+
+// MARK: - FormViewModel
+// 액션 부분에 updateForm()을 넣어준다.
+extension RegistrationController: FormViewModel {
+   func updateForm() {
+       //이 문장들 덕분에 양식이 잘되면 활성화하고 잘못됫다면 활성화 하지 않는다.
+       signUpButton.backgroundColor = viewModel.buttonBackgroundColor
+       signUpButton.setTitleColor(viewModel.buttonTitleColor, for: .normal)
+       signUpButton.isEnabled = viewModel.formIsValid
+   }
+}
+
+// MARK: - UIImagePickerControllerDelegate
+
+// 이 확장덕분에 포토플러스 버튼 이용이 가능해진다.
+extension RegistrationController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+     
+        guard let selectedImage = info[.editedImage] as? UIImage else { return }
+        
+        plushPhotoButton.layer.cornerRadius = plushPhotoButton.frame.width / 2 //프로필 사진 둥굴게
+        plushPhotoButton.layer.masksToBounds = true
+        plushPhotoButton.layer.borderColor = UIColor.white.cgColor
+        plushPhotoButton.layer.borderWidth = 2
+        plushPhotoButton.setImage(selectedImage.withRenderingMode(.alwaysOriginal), for: .normal)
+        
+        self.dismiss(animated: true, completion: nil)
+        
     }
 }
