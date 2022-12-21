@@ -12,6 +12,7 @@ class RegistrationController: UIViewController {
     // MARK: - Properties
     //이 속성을 통해 AuthenticationViewModel의 RegistrationViewModel을 사용할 수 있다.
     private var viewModel = RegistrationViewModel()
+    private var profileImage: UIImage? //이 함수를 통해 프로필 이미지를 가져오는 방법이다.
     
     private let plushPhotoButton: UIButton = {
         let button = UIButton(type: .system)
@@ -41,10 +42,13 @@ class RegistrationController: UIViewController {
         let button = UIButton(type: .system)
         button.setTitle("Sign Up", for: .normal)
         button.setTitleColor(.white, for: .normal)
-        button.backgroundColor = #colorLiteral(red: 0.3647058904, green: 0.06666667014, blue: 0.9686274529, alpha: 1)
+        button.backgroundColor = #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1).withAlphaComponent(0.5)
         button.layer.cornerRadius = 5
         button.setHeight(50)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
+        button.addTarget(self, action: #selector(handleSignUp), for: .touchUpInside)
+        //handleSignUp을 만들었으니 액션에 내려가서 새롭게 함수를 만들어 줘야한다.
+        button.isEnabled = false //버튼은 비활성화 시키지 못하고 항상 활성화 시킨다. 
         return button
     }()
     
@@ -61,6 +65,18 @@ class RegistrationController: UIViewController {
     
     
     // MARK: - Action
+    
+    @objc func handleSignUp() {
+        guard let email = emailTextField.text else { return }
+        guard let password = passwordTextField.text else { return }
+        guard let fullname = fullnameTextField.text else { return }
+        guard let username = usernameTextField.text else { return }
+        guard let profileImage = self.profileImage else { return }
+        //credentials은 신용이라는 뜻이 있다.
+        let credentials = AuthCredentials(email: email, password: password, fullname: fullname, username: username, profileimage: profileImage)
+        
+        AuthService.registerUser(withCredential: credentials)
+    }
     
     @objc func handleShowLogin() {
         navigationController?.popViewController(animated: true)
@@ -149,6 +165,7 @@ extension RegistrationController: UIImagePickerControllerDelegate, UINavigationC
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
      
         guard let selectedImage = info[.editedImage] as? UIImage else { return }
+        profileImage = selectedImage
         
         plushPhotoButton.layer.cornerRadius = plushPhotoButton.frame.width / 2 //프로필 사진 둥굴게
         plushPhotoButton.layer.masksToBounds = true
