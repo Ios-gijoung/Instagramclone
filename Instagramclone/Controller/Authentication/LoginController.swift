@@ -43,6 +43,8 @@ class LoginController: UIViewController {
         button.setHeight(50)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
         button.isEnabled = false
+        button.addTarget(self, action: #selector(handleLogin), for: .touchUpInside)
+        //handleLogin 액션으로 만들었으니 새로 action에 handleLogin을 만들어 줘야한다.
         return button
     }()
     
@@ -74,6 +76,20 @@ class LoginController: UIViewController {
     }
     
     // MARK: - Actions
+    
+    @objc func handleLogin() {
+        guard let email = emailTextField.text else { return }
+        guard let password = passwordTextField.text else { return }
+        AuthService.logUserIn(withEmail: email, password: password) {(result, error) in
+            if let error = error {
+                print("DEBUG: Failed to log user in \(error.localizedDescription)")
+                return
+                // 사용자를 로그인하기 위해 이 함수를 작성했다(로그인 할수있게 만든다, 로그인이 오류나면 작동이 안된다). (아래 dismiss함수 덕분에)
+            }
+            self.dismiss(animated: true, completion: nil )
+        }
+    }
+    
     // 이버튼 덕분에 사인업 누르면 리지스트레이션 페이지로 넘어갈 수 있다.
     @objc func handleShowSignUp() {
         let controller = RegistrationController()

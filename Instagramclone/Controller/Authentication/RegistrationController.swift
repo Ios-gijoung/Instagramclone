@@ -48,7 +48,7 @@ class RegistrationController: UIViewController {
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
         button.addTarget(self, action: #selector(handleSignUp), for: .touchUpInside)
         //handleSignUp을 만들었으니 액션에 내려가서 새롭게 함수를 만들어 줘야한다.
-        button.isEnabled = false //버튼은 비활성화 시키지 못하고 항상 활성화 시킨다. 
+        button.isEnabled = false //버튼은 비활성화 시키지 못하고 항상 활성화 시킨다.
         return button
     }()
     
@@ -75,8 +75,9 @@ class RegistrationController: UIViewController {
         //credentials은 신용이라는 뜻이 있다.
         let credentials = AuthCredentials(email: email, password: password, fullname: fullname, username: username, profileimage: profileImage)
         
-        AuthService.registerUser(withCredential: credentials)
-    }
+        //회원가입 후 사인업(회원가입 완료)를 누르면 로그인 상태로 유지된다.
+            self.dismiss(animated: true, completion: nil)
+}
     
     @objc func handleShowLogin() {
         navigationController?.popViewController(animated: true)

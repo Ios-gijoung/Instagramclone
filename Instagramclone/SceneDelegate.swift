@@ -16,9 +16,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         guard let scene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: scene)
-        // window?.rootViewController = MainTabController()
+        window?.rootViewController = MainTabController()
         // 첫화면 설정, 이렇게 하면 첫 페이지는 로그인 컨트롤러가 나온다.
-        window?.rootViewController = UINavigationController(rootViewController: LoginController())
+        //window?.rootViewController = UINavigationController(rootViewController: LoginController())
         window?.makeKeyAndVisible()
         
     }
