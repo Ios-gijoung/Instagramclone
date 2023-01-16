@@ -7,11 +7,16 @@
 
 import UIKit
 
+protocol AuthenticationDelegate: class { //로그아웃 후, 다른사람으로 로그인하면 그사람으로 로그인 할 수 있게해줌
+    func authenticationDidComplete() //올바른 사용자를 가져오는지 확인 
+}
+
 class LoginController: UIViewController {
     
     // MARK: - Properties
     //이 속성을 통해 LoginViewModel을 사용할 수 있다.
     private var viewModel = LoginViewModel()
+    weak var delegate: AuthenticationDelegate?
     
     // 아이콘을 만들어 줬다면 아래 Helpers에 등록해주자.
     private let iconImage: UIImageView = {
@@ -86,13 +91,14 @@ class LoginController: UIViewController {
                 return
                 // 사용자를 로그인하기 위해 이 함수를 작성했다(로그인 할수있게 만든다, 로그인이 오류나면 작동이 안된다). (아래 dismiss함수 덕분에)
             }
-            self.dismiss(animated: true, completion: nil )
+            self.delegate?.authenticationDidComplete()
         }
     }
     
     // 이버튼 덕분에 사인업 누르면 리지스트레이션 페이지로 넘어갈 수 있다.
     @objc func handleShowSignUp() {
         let controller = RegistrationController()
+        controller.delegate = delegate
         navigationController?.pushViewController(controller, animated: true)
     }
     

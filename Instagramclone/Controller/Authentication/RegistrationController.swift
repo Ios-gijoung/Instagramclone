@@ -13,6 +13,7 @@ class RegistrationController: UIViewController {
     //이 속성을 통해 AuthenticationViewModel의 RegistrationViewModel을 사용할 수 있다.
     private var viewModel = RegistrationViewModel()
     private var profileImage: UIImage? //이 함수를 통해 프로필 이미지를 가져오는 방법이다.
+    weak var delegate: AuthenticationDelegate?
     
     private let plushPhotoButton: UIButton = {
         let button = UIButton(type: .system)
@@ -56,7 +57,7 @@ class RegistrationController: UIViewController {
     private let alreadyHaveAccountButton: UIButton = {
         let button = UIButton(type: .system)
         //extension에서 정의한 양식을 붙여넣어준다.
-        button.attributedTitle(firstPart: "Don't have an account?", secondPart: "Sign Up")
+        button.attributedTitle(firstPart: "Already have an account?", secondPart: "Log In")
         button.addTarget(self, action: #selector(handleShowLogin), for: .touchUpInside)
         //여기서 셀프는 로긴 컨트롤러 클래스를 말한다, 누르면 아래 핸들쇼 사인업이 실행됨, 목적은 터치시(클릭시) 기재내용으로 들어간다.
         //handleShowLogin함수는 아직 없으니 아래 Action부분에 만들어 준다.
@@ -82,9 +83,9 @@ class RegistrationController: UIViewController {
                 return
             }
             //회원가입 후 사인업(회원가입 완료)를 누르면 로그인 상태로 유지된다.
-                self.dismiss(animated: true, completion: nil)
+            self.delegate?.authenticationDidComplete()
         }
-}
+    }
     
     @objc func handleShowLogin() {
         navigationController?.popViewController(animated: true)
@@ -105,7 +106,7 @@ class RegistrationController: UIViewController {
     
     //위 plusphotobutton을 위해 handleProfilePhotoSelect기능을 만들어준다.
     @objc func handleProfilePhotoSelect() {
-       let picker = UIImagePickerController()
+        let picker = UIImagePickerController()
         picker.delegate = self //RegistrationController 자신을 받기에 셀프로 만들어 준다. 아래 확장함수도 함께 만들어준다.
         picker.allowsEditing = true
         
@@ -158,12 +159,12 @@ class RegistrationController: UIViewController {
 // MARK: - FormViewModel
 // 액션 부분에 updateForm()을 넣어준다.
 extension RegistrationController: FormViewModel {
-   func updateForm() {
-       //이 문장들 덕분에 양식이 잘되면 활성화하고 잘못됫다면 활성화 하지 않는다.
-       signUpButton.backgroundColor = viewModel.buttonBackgroundColor
-       signUpButton.setTitleColor(viewModel.buttonTitleColor, for: .normal)
-       signUpButton.isEnabled = viewModel.formIsValid
-   }
+    func updateForm() {
+        //이 문장들 덕분에 양식이 잘되면 활성화하고 잘못됫다면 활성화 하지 않는다.
+        signUpButton.backgroundColor = viewModel.buttonBackgroundColor
+        signUpButton.setTitleColor(viewModel.buttonTitleColor, for: .normal)
+        signUpButton.isEnabled = viewModel.formIsValid
+    }
 }
 
 // MARK: - UIImagePickerControllerDelegate
@@ -171,7 +172,7 @@ extension RegistrationController: FormViewModel {
 // 이 확장덕분에 포토플러스 버튼 이용이 가능해진다.
 extension RegistrationController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-     
+        
         guard let selectedImage = info[.editedImage] as? UIImage else { return }
         profileImage = selectedImage
         

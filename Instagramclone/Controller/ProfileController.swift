@@ -17,32 +17,35 @@ class ProfileController: UICollectionViewController {
     // 프로필 이미지를 가져오기 위한 프로퍼티
     // 모델 Users를 통해서 쉽게 관리할 수 있다.
     // didSet은 옵저버 역할을 해준다.
-    var user: User? {
-        didSet { navigationItem.title = user?.username }
-    }
+    private var user: User
     
     // MARK: - Lifecycle
+    
+    init(user: User) {
+        self.user = user
+        super.init(collectionViewLayout: UICollectionViewFlowLayout())
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureCollectionView()
-        fetchUser()
     }
     
     // MARK: - API
     // userservice에서 프로필 컨트롤러로 돌아가서 이함수를 다시 호출하려고 하면, 사용자 정보를 가져온다.
     // Model의 Users를 통해 파이어베이스 내용인 email, fullname, profileImageUrl, username, uid를 쉽게 가져온다.
     // API호출은 시간이 걸리기 때문에
-    func fetchUser() {
-        UserService.fetchUser { user in
-            self.user = user
-            self.navigationItem.title = user.username
-        }
-    }
+    // 이 함수를 통해서 사용자 정보를 가져온다.  -> 프로퍼티로 이동
+   
     
     // MARK: - Helpers
     
     func configureCollectionView() {
-        
+        navigationItem.title = user.username //네비게이션 타이틀에 사용자아이디를 보이게 한다. 
         collectionView.backgroundColor = .white
         collectionView.register(ProfileCell.self, forCellWithReuseIdentifier: cellIdentifier)
         collectionView.register(ProfileHeader.self,
@@ -65,7 +68,8 @@ extension ProfileController {
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerIdentifier, for: indexPath) as! ProfileHeader
-       
+    
+        header.viewModel = ProfileHeaderViewModel(user: user)
         return header
     }
 }
