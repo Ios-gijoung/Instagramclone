@@ -14,12 +14,29 @@ private let headerIdentifier = "ProfileHeader"
 class ProfileController: UICollectionViewController {
     
     // MARK: - Properties
+    // 프로필 이미지를 가져오기 위한 프로퍼티
+    // 모델 Users를 통해서 쉽게 관리할 수 있다.
+    // didSet은 옵저버 역할을 해준다.
+    var user: User? {
+        didSet { navigationItem.title = user?.username }
+    }
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         configureCollectionView()
-        
+        fetchUser()
+    }
+    
+    // MARK: - API
+    // userservice에서 프로필 컨트롤러로 돌아가서 이함수를 다시 호출하려고 하면, 사용자 정보를 가져온다.
+    // Model의 Users를 통해 파이어베이스 내용인 email, fullname, profileImageUrl, username, uid를 쉽게 가져온다.
+    // API호출은 시간이 걸리기 때문에
+    func fetchUser() {
+        UserService.fetchUser { user in
+            self.user = user
+            self.navigationItem.title = user.username
+        }
     }
     
     // MARK: - Helpers
@@ -46,9 +63,9 @@ extension ProfileController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-       
-        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerIdentifier, for: indexPath) as! ProfileHeader
         
+        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerIdentifier, for: indexPath) as! ProfileHeader
+       
         return header
     }
 }

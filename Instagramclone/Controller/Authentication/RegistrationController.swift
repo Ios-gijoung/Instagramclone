@@ -73,10 +73,17 @@ class RegistrationController: UIViewController {
         guard let username = usernameTextField.text else { return }
         guard let profileImage = self.profileImage else { return }
         //credentials은 신용이라는 뜻이 있다.
-        let credentials = AuthCredentials(email: email, password: password, fullname: fullname, username: username, profileimage: profileImage)
+        let credentials = AuthCredentials(email: email, password: password, fullname: fullname, username: username, profileImage: profileImage)
         
-        //회원가입 후 사인업(회원가입 완료)를 누르면 로그인 상태로 유지된다.
-            self.dismiss(animated: true, completion: nil)
+        
+        AuthService.registerUser(withCredential: credentials) { error in
+            if let error = error {
+                print("DEBUG: Failed to register user \(error.localizedDescription)")
+                return
+            }
+            //회원가입 후 사인업(회원가입 완료)를 누르면 로그인 상태로 유지된다.
+                self.dismiss(animated: true, completion: nil)
+        }
 }
     
     @objc func handleShowLogin() {
