@@ -10,6 +10,7 @@
 		CE2BB618294C7B0C0036274A /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2BB617294C7B0C0036274A /* CustomTextField.swift */; };
 		CE33E76B2951BD200090B17D /* AuthenticationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE33E76A2951BD200090B17D /* AuthenticationViewModel.swift */; };
 		CE4832322975329C00F34663 /* ProfileHeaderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4832312975329C00F34663 /* ProfileHeaderViewModel.swift */; };
+		CE4AF44E29767E690004D5D0 /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4AF44D29767E690004D5D0 /* UserCell.swift */; };
 		CE6DA49829485E0200659653 /* FeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6DA49729485E0200659653 /* FeedCell.swift */; };
 		CE6DA49A2948619E00659653 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6DA4992948619E00659653 /* Extensions.swift */; };
 		CE6DA49D294861DD00659653 /* JGProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = CE6DA49C294861DD00659653 /* JGProgressHUD */; };
@@ -70,6 +71,7 @@
 		CE2BB617294C7B0C0036274A /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		CE33E76A2951BD200090B17D /* AuthenticationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewModel.swift; sourceTree = "<group>"; };
 		CE4832312975329C00F34663 /* ProfileHeaderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderViewModel.swift; sourceTree = "<group>"; };
+		CE4AF44D29767E690004D5D0 /* UserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
 		CE6DA49729485E0200659653 /* FeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCell.swift; sourceTree = "<group>"; };
 		CE6DA4992948619E00659653 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		CE9E7945293DCCCF00AC19C8 /* Instagramclone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Instagramclone.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -224,6 +226,7 @@
 				CEBECA7B2954583C002A12FC /* Profile */,
 				CE6DA49729485E0200659653 /* FeedCell.swift */,
 				CE2BB617294C7B0C0036274A /* CustomTextField.swift */,
+				CE4AF44D29767E690004D5D0 /* UserCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -371,6 +374,7 @@
 				CE9E7969293DEC1600AC19C8 /* ImageSelectorController.swift in Sources */,
 				CE9E796B293DEC2800AC19C8 /* NotificationController.swift in Sources */,
 				CE33E76B2951BD200090B17D /* AuthenticationViewModel.swift in Sources */,
+				CE4AF44E29767E690004D5D0 /* UserCell.swift in Sources */,
 				CE9E7967293DEC0100AC19C8 /* SearchController.swift in Sources */,
 				CEB08CEF2958307500074F5E /* Users.swift in Sources */,
 				CE9E794D293DCCCF00AC19C8 /* ViewController.swift in Sources */,

@@ -62,6 +62,7 @@ extension ProfileController {
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         //dequeueReusableCell는 메모리관리를 위해 존재// 10:13까지 들음
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath) as! ProfileCell
+        
         return cell
     }
     

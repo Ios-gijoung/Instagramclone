@@ -18,4 +18,14 @@ struct UserService {
             
         }
     }
+    
+    static func fetchUsers(completion: @escaping([User]) -> Void) { // 필요한 데이터를 가져오고 각 항목을 사용자 개체에 매핑한 다음 모든 항목을 배치한다. 
+        COLLECTION_USERS.getDocuments {(snapshot, error) in
+            guard let snapshot = snapshot else { return }
+            
+            let users = snapshot.documents.map({ User(dictionary: $0.data()) }) //$0은 해당 문세 배열의 각 문서를 나타낸다. 
+            completion(users)
+        }
+    }
 }
+
