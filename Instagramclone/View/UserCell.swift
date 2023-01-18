@@ -11,11 +11,11 @@ class UserCell: UITableViewCell {
     
     // MARK:    - Properties
     
-    var user: User? {
-        didSet {
-            usernameLabel.text = user?.username //이 문장 덕분에 프로필 유저네임과 풀네임을 올바르게 가져올 수 있다. 
-            fullnameLabel.text = user?.fullname
-        }
+    var viewModel: UserCellViewModel? {
+        // var user: User? {
+        didSet { configure() }
+        // usernameLabel.text = user?.username //이 문장 덕분에 프로필 유저네임과 풀네임을 올바르게 가져올 수 있다.
+        // fullnameLabel.text = user?.fullname
     }
     
     // 프로필을 만들어보자
@@ -64,5 +64,15 @@ class UserCell: UITableViewCell {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK:    - Helpers
+    
+    func configure() {
+        guard let viewModel = viewModel else { return }
+        
+        profileImageView.sd_setImage(with: viewModel.profileImageUrl)
+        usernameLabel.text = viewModel.username
+        fullnameLabel.text = viewModel.fullname 
     }
 }
